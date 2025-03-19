@@ -1,0 +1,43 @@
+import numpy as np
+
+# Crear una población ficticia
+poblacion = np.random.randint(1, 101, 500)
+
+# Función para calcular la media muestral
+def calcular_media_muestral(muestra):
+    return np.mean(muestra)
+
+# 1. Muestreo aleatorio simple con reemplazo
+muestra_aleatoria_reemplazo = np.random.choice(poblacion, size=30, replace=True)
+media_aleatoria_reemplazo = calcular_media_muestral(muestra_aleatoria_reemplazo)
+print(f"Media muestral (Muestreo aleatorio con reemplazo): {media_aleatoria_reemplazo:.2f}")
+
+# 2. Muestreo aleatorio simple sin reemplazo
+muestra_aleatoria_sin_reemplazo = np.random.choice(poblacion, size=30, replace=False)
+media_aleatoria_sin_reemplazo = calcular_media_muestral(muestra_aleatoria_sin_reemplazo)
+print(f"Media muestral (Muestreo aleatorio sin reemplazo): {media_aleatoria_sin_reemplazo:.2f}")
+
+# 3. Muestreo sistemático
+# Elegimos un punto de inicio aleatorio y seleccionamos cada 5º valor
+inicio_aleatorio = np.random.randint(0, 5)
+muestra_sistematica = poblacion[inicio_aleatorio::5][:30]  # Selección de cada 5º valor
+media_sistematica = calcular_media_muestral(muestra_sistematica)
+print(f"Media muestral (Muestreo sistemático): {media_sistematica:.2f}")
+
+# 4. Muestreo por conglomerados
+# Dividimos la población en 10 grupos de 50 elementos
+grupos = [poblacion[i:i+50] for i in range(0, len(poblacion), 50)]
+# Seleccionamos 3 grupos de manera aleatoria
+grupos_seleccionados = np.random.choice(grupos, size=3, replace=False)
+# Combinamos los 3 grupos seleccionados en una sola muestra
+muestra_conglomerados = np.concatenate(grupos_seleccionados)
+media_conglomerados = calcular_media_muestral(muestra_conglomerados)
+print(f"Media muestral (Muestreo por conglomerados): {media_conglomerados:.2f}")
+
+# 5. Muestreo polietápico
+# Seleccionamos 3 grupos aleatorios de la población
+grupos_polietapicos = np.random.choice(grupos, size=3, replace=False)
+# Dentro de cada grupo, seleccionamos 5 valores aleatorios
+muestra_polietapica = np.concatenate([np.random.choice(grupo, size=5, replace=False) for grupo in grupos_polietapicos])
+media_polietapica = calcular_media_muestral(muestra_polietapica)
+print(f"Media muestral (Muestreo polietápico): {media_polietapica:.2f}")

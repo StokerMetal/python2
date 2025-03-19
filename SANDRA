@@ -1,0 +1,16 @@
+def min_max_scaling(data):
+    min_val = min(data)
+    max_val = max(data)
+    normalized_data = [(round((x - min_val) / (max_val - min_val), 2)) for x in data]
+    return normalized_data
+
+# Solicitar datos al usuario
+try:
+    user_input = input("Ingrese una lista de números separados por comas: ")
+    data = [float(num.strip()) for num in user_input.split(',')]
+    
+    # Normalizar los datos
+    normalized_data = min_max_scaling(data)
+    print("Datos normalizados:", normalized_data)
+except ValueError:
+    print("Error: Ingrese solo números válidos separados por comas.")

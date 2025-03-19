@@ -1,0 +1,64 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import skew, kurtosis
+
+# Paso 1: Crear una población ficticia
+# Generamos 500 valores aleatorios en el rango de 1 a 100
+poblacion = np.random.randint(1, 101, 500)
+
+# Crear identificadores para cada persona
+identificadores = np.arange(1, 501)
+
+# Datos adicionales para cada persona
+edades = np.random.randint(18, 70, 500)  # Edades aleatorias entre 18 y 70
+ingresos = np.random.randint(200, 5000, 500)  # Ingresos aleatorios entre 200 y 5000
+ciudades = np.random.choice(['Ciudad A', 'Ciudad B', 'Ciudad C', 'Ciudad D'], 500)  # Ciudades aleatorias
+
+# Mostrar los primeros 10 valores de la población con sus datos adicionales
+print("Datos de las primeras 10 personas en la población:")
+for i in range(10):
+    print(f"ID: {identificadores[i]}, Edad: {edades[i]}, Ingreso: ${ingresos[i]}, Ciudad: {ciudades[i]}, Valor: {poblacion[i]}")
+
+# Paso 2: Calcular algunos datos estadísticos de la población
+minimo = np.min(poblacion)
+maximo = np.max(poblacion)
+media = np.mean(poblacion)
+mediana = np.median(poblacion)
+desviacion_estandar = np.std(poblacion)
+varianza = np.var(poblacion)
+
+# Calcular percentiles
+percentil_25 = np.percentile(poblacion, 25)
+percentil_50 = np.percentile(poblacion, 50)
+percentil_75 = np.percentile(poblacion, 75)
+
+# Calcular coeficiente de asimetría y curtosis
+asimetria = skew(poblacion)
+curtosis_val = kurtosis(poblacion)
+
+# Mostrar los datos estadísticos detallados en la consola
+print("\nDatos estadísticos de la población:")
+print(f"Valor mínimo: {minimo}")
+print(f"Valor máximo: {maximo}")
+print(f"Media: {media:.2f}")
+print(f"Mediana: {mediana}")
+print(f"Desviación estándar: {desviacion_estandar:.2f}")
+print(f"Varianza: {varianza:.2f}")
+print(f"Percentil 25: {percentil_25}")
+print(f"Percentil 50 (Mediana): {percentil_50}")
+print(f"Percentil 75: {percentil_75}")
+print(f"Asimetría (Skewness): {asimetria:.2f}")
+print(f"Curtoisis (Kurtosis): {curtosis_val:.2f}")
+
+# Paso 3: Crear un histograma de la población
+# Usamos 20 intervalos (bins) para la visualización
+plt.hist(poblacion, bins=20, color='blue', alpha=0.7, edgecolor='black')
+
+# Personalización del gráfico
+plt.title('Histograma de la Población Generada')
+plt.xlabel('Valores')
+plt.ylabel('Frecuencia')
+plt.grid(True, linestyle='--', alpha=0.7)
+
+# Mostrar el gráfico
+plt.show()

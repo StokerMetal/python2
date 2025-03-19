@@ -1,0 +1,19 @@
+import pandas as pd
+
+# Cargar el archivo CSV
+df = pd.read_csv('Titanic-Dataset.csv')
+
+# Mostrar las últimas 10 filas del dataset
+print("Últimas 10 filas del dataset:")
+print(df.tail(10))
+
+# Seleccionar únicamente las columnas Pclass, Fare, Age y Survived y guardarlas en un nuevo DataFrame
+fare_data = df[['Pclass', 'Fare', 'Age', 'Survived']]
+
+# Calcular el precio promedio del boleto (Fare) para los pasajeros que sobrevivieron y no sobrevivieron
+promedio_fare_sobrevivieron = fare_data[fare_data['Survived'] == 1]['Fare'].mean()
+promedio_fare_no_sobrevivieron = fare_data[fare_data['Survived'] == 0]['Fare'].mean()
+
+# Mostrar los resultados
+print(f"El precio promedio del boleto para los sobrevivientes es: {promedio_fare_sobrevivieron}")
+print(f"El precio promedio del boleto para los que no sobrevivieron es: {promedio_fare_no_sobrevivieron}")
